@@ -7,7 +7,7 @@ Use:
 
 from units import C
 
-#assign units to a number - in this case 10 lbf of force:
+assign units to a number - in this case 10 lbf of force:
 F = 10*C.LBF
 
 report the number in units force:
