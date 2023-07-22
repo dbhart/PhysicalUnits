@@ -33,11 +33,22 @@ class C():
     M = 1000./25.4/12.
     CM = 10/25.4/12
     MM = 1/25.4/12
+    MILE = 5280.
+    NM = 6076
 
     # time
     SEC = 1.
     MILISEC = 1.0e-3
     MICROSEC = 1.0e-6
+    MIN = 60.
+    HOUR = 3600.
+    DAY = 3600*24.
+    YEAR = 3600*24.*365
+
+    # speed
+    FPS = 1.
+    MPH = 5280./3600.
+    KNOT = 6076./3600.
 
     # force
     LBF = 1.
@@ -54,3 +65,9 @@ class C():
     MSI = 144.0e6
     PSF = 1.
     PA = 20.89/1000
+
+    # # temperature
+    # K = -273.15
+    # C = 1.
+    # F = 9./5.+32.
+    # R = 9./5.+32+459.67
