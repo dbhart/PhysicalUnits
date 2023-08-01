@@ -14,11 +14,11 @@
 # print ( rho / (C.SLUG/C.FT**3) )
 
 class C():
-    from math import pi as mypi
+    from math import pi
     # angles
-    DEG = mypi/180.
-    ARCMIN = mypi/180/60
-    ARCSEC = mypi/180/360
+    DEG = pi/180.
+    ARCMIN = pi/180/60
+    ARCSEC = pi/180/360
     RAD = 1.
 
     # mass
