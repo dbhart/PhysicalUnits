@@ -15,11 +15,12 @@
 
 class C():
     from math import pi
+    
     # angles - ref radians
+    RAD = 1.
     DEG = pi/180.
     ARCMIN = pi/180./60.
     ARCSEC = pi/180./360.
-    RAD = 1.
     
     #periodic rate ref - rad/sec
     HZ = 1./2./pi
@@ -31,6 +32,7 @@ class C():
     SLINCH = 12.
     KG = 1./14.5939
     GM = 1./14593.9
+    LBM = 1./32.174
 
     # length - ref ft
     FT = 1.
@@ -57,12 +59,12 @@ class C():
 
     # force - ref pound-force
     LBF = 1.
-    N = 0.22480894387096
-    KN = 224.80894387096
+    N = 1/4.448222
+    KN = 1000/4.448222
 
     # gravitational constant - ref earth surface gravity in ft/sec2
     G0 = 32.174
-    LBM = 1./32.174
+    
 
     # pressure - ref lbf/ft2
     PSI = 144.
