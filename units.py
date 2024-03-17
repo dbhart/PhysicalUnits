@@ -13,69 +13,168 @@
 # report the unit is US customary units:
 # print ( rho / (C.SLUG/C.FT**3) )
 
-class C():
-    from math import pi
+class units():
+    # the following classes reference NIST Guide to the SI, Appendix B.9
+    class Celsius:
+        def __rmul__(self,other):
+            return other+273
+        def __rtruediv__(self,other):
+            return other-273
+    class Fahrenheit:
+        def __rmul__(self,other):
+            return (other+459.67)/1.8
+        def __rtruediv__(self,other):
+            return other*1.8-459.67
+
+    class __SI_Const:
+        G0_M_SEC2       = 9.806_65
+        C_M_SEC         = 299_792_458
+        ATM_PA          = 101_325
+        G_M3_KG_SEC2    = 6.674_30E-11
+        
+    class __US_2_SI:
+        FT_2_M          = 3.048E-01
+        SLUG_2_KG       = 1.459_390E+01
+        LBF_2_N         = 4.448_222
+        GAL_2_M3        = 3.785_412E-03
     
-    # angles - ref radians
-    RAD = 1.
-    DEG = pi/180.
-    ARCMIN = pi/180./60.
-    ARCSEC = pi/180./360.
-    
-    #periodic rate ref - rad/sec
-    HZ = 1./2./pi
-    DPS = 180./pi
-    RPM = 60./2./pi
+    def __init__(self,base_unit_sys="SI"):
+        from math import pi
+        match base_unit_sys:
+            case "SI":
+                # length - ref m
+                self.M          = 1
+                self.FT         = self.__US_2_SI.FT_2_M
 
-    # mass - ref slug
-    SLUG = 1.
-    SLINCH = 12.
-    KG = 1./14.5939
-    GM = 1./14593.9
-    LBM = 1./32.174
+                # mass - ref kg
+                self.KG         = 1
+                self.SLUG       = self.__US_2_SI.SLUG_2_KG
 
-    # length - ref ft
-    FT = 1.
-    IN = 1./12.
-    M = 1000./25.4/12.
-    CM = 10./25.4/12.
-    MM = 1./25.4/12.
-    MILE = 5280.
-    NM = 6076.
+                # force - ref Newton
+                self.N          = 1
+                self.LBF        = self.__US_2_SI.LBF_2_N
+                
+                #volume - ref m3
+                self.M3         = 1
+                self.GAL        = self.__US_2_SI.GAL_2_M3
 
-    # time - ref sec
-    SEC = 1.
-    MILISEC = 1.0e-3
-    MICROSEC = 1.0e-6
-    MIN = 60.
-    HOUR = 3600.
-    DAY = 3600.*24.
-    YEAR = 3600.*24.*365.
+            case "US":
+                # length - ref ft
+                self.M          = 1/self.__US_2_SI.FT_2_M
+                self.FT         = 1
 
-    # speed - ref fps
-    FPS = 1.
-    MPH = 5280./3600.
-    KNOT = 6076./3600.
+                # mass - ref slug
+                self.KG         = 1/self.__US_2_SI.SLUG_2_KG
+                self.SLUG       = 1
 
-    # force - ref pound-force
-    LBF = 1.
-    N = 1/4.448222
-    KN = 1000/4.448222
+                # force - ref lbf
+                self.N          = 1/self.__US_2_SI.LBF_2_N
+                self.LBF        = 1
+                
+                #volume - ref m3
+                self.M3         = 1/self.__US_2_SI.GAL_2_M3
+                self.GAL        = 1
+            
+            case "US-INCH":
+                # length - ref ft
+                self.M          = 12/self.__US_2_SI.FT_2_M
+                self.FT         = 12
 
-    # gravitational constant - ref earth surface gravity in ft/sec2
-    G0 = 32.174
-    
+                # mass - ref slug
+                self.KG         = 12/self.__US_2_SI.SLUG_2_KG
+                self.SLUG       = 12
 
-    # pressure - ref lbf/ft2
-    PSI = 144.
-    KSI = 144.0e3
-    MSI = 144.0e6
-    PSF = 1.
-    PA = 20.89/1000.
+                # force - ref lbf
+                self.N          = 144/self.__US_2_SI.LBF_2_N
+                self.LBF        = 144
+                
+                #volume - ref m3
+                self.M3         = 1/self.__US_2_SI.GAL_2_M3
+                self.GAL        = 1
+            case _:
+                raise Exception('error incorrect base unit name.\nUse "SI", "US", or "US-INCH"')
+        
+        # time - ref sec
+        self.SEC        = 1
+        self.MILISEC    = 1.0e-3
+        self.MICROSEC   = 1.0e-6
+        self.MIN        = 60
+        self.HOUR       = 3600
+        self.DAY        = 3600.*24
+        self.YEAR       = 3600*24*365
 
-    # temperature !!To be later implemented - this unit requires a DC offset, which would require a modification of
-    # python std operotors to implement in its given syntax!!
-    # K = -273.15
-    # C = 1.
-    # F = 9./5.+32.
-    # R = 9./5.+32+459.67
+        #periodic rate ref - rad/sec
+        self.HZ         = 1./2./pi
+        self.DPS        = 180./pi
+        self.RPM        = 60./2./pi
+        
+        # angles - ref radians
+        self.RAD        = 1.
+        self.DEG        = pi/180.
+        self.ARCMIN     = pi/180./60.
+        self.ARCSEC     = pi/180./3600.
+        
+        # temp - ref Kelvin
+        self.K = 1
+        self.R = 1/1.8
+        self.C = self.Celsius()
+        self.F = self.Fahrenheit()
+        
+        # gravitational constant
+        self.G          = self.__SI_Const.G_M3_KG_SEC2*self.M3/self.KG/self.SEC**2
+        # earth surface gravity
+        self.G0         = self.__SI_Const.G0_M_SEC2*self.M/self.SEC**2
+        # standard atmosphere
+        self.ATM        = self.__SI_Const.ATM_PA*self.N/self.M**2
+        # gravitational constant
+        self.C0         = self.__SI_Const.C_M_SEC*self.M/self.SEC**2
+        
+        # Derived Unites
+        # length
+        self.MIL        = self.FT/12/1000
+        self.IN         = self.FT/12
+        self.YARD       = self.FT*3
+        self.MILE       = self.FT*5280
+
+        self.MM         = self.M*1.0E-03
+        self.CM         = self.M*1.0E-02
+        self.KM         = self.M*1.0E+03
+        self.NM         = self.M*1852
+
+        # mass
+        self.SLINCH     = self.SLUG*12
+        self.LBM        = self.SLUG/self.G0
+        self.OZ         = self.LBM/16
+
+        self.GM         = self.KG*1.0E-03
+                       
+        # force - ref Newton
+        self.TON        = self.LBF*2000
+        self.KN         = self.N*1000
+
+        # pressure - ref Pascal
+        self.PSI        = self.LBF/self.IN**2
+        self.KSI        = self.PSI*1.0E3
+        self.MSI        = self.PSI*1.0E6
+
+        self.PA         = self.N/self.M**2
+        self.BAR        = self.PA
+
+        # speed ref m/sec
+        self.FPS        = self.FT/self.SEC
+        self.FPM        = self.FT/self.MIN
+        self.FPH        = self.FT/self.HOUR
+        self.IPS        = self.IN/self.SEC
+        self.MPH        = self.MILE/self.HOUR
+
+        self.KPH        = self.KM/self.HOUR
+        self.KNOT       = self.NM/self.HOUR
+
+        # volume ref m3
+        self.QT         = self.GAL/4
+        self.CUP        = self.GAL/16
+        self.FLOZ       = self.GAL/16/8
+        self.TBSP       = self.GAL/16/16
+        self.TSP        = self.GAL/16/48
+
+        self.L          = self.M3*1.0E-03
