@@ -127,7 +127,7 @@ class units():
         self.G0         = self.__SI_Const.G0_M_SEC2*self.M/self.SEC**2
         # standard atmosphere
         self.ATM        = self.__SI_Const.ATM_PA*self.N/self.M**2
-        # gravitational constant
+        # speed of light in vacuum
         self.C0         = self.__SI_Const.C_M_SEC*self.M/self.SEC**2
         
         # Derived Unites
@@ -144,7 +144,7 @@ class units():
 
         # mass
         self.SLINCH     = self.SLUG*12
-        self.LBM        = self.SLUG/self.G0
+        self.LBM        = self.LBF/self.G0
         self.OZ         = self.LBM/16
 
         self.GM         = self.KG*1.0E-03
