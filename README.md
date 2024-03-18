@@ -1,10 +1,15 @@
-# PyUnits
-Physical units for scientific and engineering
-This is a simple implementation of a units framework for python, and can be expanded upon as desired.
+# physicalunits
+Physical units framework for scientific and engineering programming
+This implementation of a units framework for python, has low overhead, and can be expanded upon as desired.
+Reference conversion factors and constants are derived from NIST standards when available
+Some US customary units use implicit conversions and derivations
 
 ## Use:
 
-from units import C
+**import the library and establish the base unit system
+
+from physicalunits import units
+C = units('US')
 
 **assign units to a number - in this case 10 lbf of force:**
 
