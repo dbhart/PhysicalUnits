@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='simple-unit-system',
-    version='0.0.2',
+    version='0.0.3',
     description="A framework for applying physical units and performing unit conversions, for scientific and engineering analyses, based on NIST conversions and constants",
     long_description=open('README.md', 'r').read(),
     long_description_content_type='text/markdown',

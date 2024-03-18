@@ -14,7 +14,7 @@
 # report the unit is US customary units:
 # #print ( rho / (C.SLUG/C.FT**3) )
 
-class units():
+class Units():
     # the following classes reference NIST Guide to the SI, Appendix B.9
     class Celsius:
         def __rmul__(self,other):
