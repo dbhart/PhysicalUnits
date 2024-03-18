@@ -72,24 +72,24 @@ class units():
                 self.N          = 1/self.__US_2_SI.LBF_2_N
                 self.LBF        = 1
                 
-                #volume - ref m3
+                #volume - ref gal
                 self.M3         = 1/self.__US_2_SI.GAL_2_M3
                 self.GAL        = 1
             
             case "US-INCH":
-                # length - ref ft
+                # length - ref inch
                 self.M          = 12/self.__US_2_SI.FT_2_M
                 self.FT         = 12
 
-                # mass - ref slug
-                self.KG         = 12/self.__US_2_SI.SLUG_2_KG
-                self.SLUG       = 12
+                # mass - ref slinch
+                self.KG         = 1/self.__US_2_SI.SLUG_2_KG/12
+                self.SLUG       = 1/12
 
                 # force - ref lbf
-                self.N          = 144/self.__US_2_SI.LBF_2_N
-                self.LBF        = 144
+                self.N          = 1/self.__US_2_SI.LBF_2_N
+                self.LBF        = 1
                 
-                #volume - ref m3
+                #volume - ref gal
                 self.M3         = 1/self.__US_2_SI.GAL_2_M3
                 self.GAL        = 1
             case _:
@@ -179,3 +179,5 @@ class units():
         self.TSP        = self.GAL/16/48
 
         self.L          = self.M3*1.0E-03
+        self.ML         = self.M3*1.0E-06
+        self.CC         = self.M3*1.0E-06

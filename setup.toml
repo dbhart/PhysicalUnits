@@ -1,5 +1,0 @@
-[project]
-name = "physicalunits"
-version = "0.0.2"
-dependencies = [
-]
