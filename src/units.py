@@ -105,9 +105,9 @@ class units():
         self.YEAR       = 3600*24*365
 
         #periodic rate ref - rad/sec
-        self.HZ         = 1./2./pi
-        self.DPS        = 180./pi
-        self.RPM        = 60./2./pi
+        self.HZ         = 2.*pi
+        self.DPS        = pi/180.
+        self.RPM        = 2.*pi/60.
         
         # angles - ref radians
         self.RAD        = 1.
