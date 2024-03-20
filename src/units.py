@@ -39,6 +39,7 @@ class units():
         LBF_2_N         = 4.448_222
         GAL_2_M3        = 3.785_412E-03
     
+    # initialize the class and establish the base unit system
     def __init__(self,base_unit_sys="SI"):
         from math import pi
         match base_unit_sys:
@@ -95,6 +96,7 @@ class units():
             case _:
                 raise Exception('error incorrect base unit name.\nUse "SI", "US", or "US-INCH"')
         
+        # define units, which are common to all unit base systems
         # time - ref sec
         self.SEC        = 1
         self.MILISEC    = 1.0e-3
@@ -121,6 +123,7 @@ class units():
         self.C = self.Celsius()
         self.F = self.Fahrenheit()
         
+        # establish physical constants
         # gravitational constant
         self.G          = self.__SI_Const.G_M3_KG_SEC2*self.M3/self.KG/self.SEC**2
         # earth surface gravity
@@ -130,7 +133,7 @@ class units():
         # speed of light in vacuum
         self.C0         = self.__SI_Const.C_M_SEC*self.M/self.SEC**2
         
-        # Derived Unites
+        # Define Derived Unites
         # length
         self.MIL        = self.FT/12/1000
         self.IN         = self.FT/12
@@ -164,7 +167,6 @@ class units():
         # speed ref m/sec
         self.FPS        = self.FT/self.SEC
         self.FPM        = self.FT/self.MIN
-        self.FPH        = self.FT/self.HOUR
         self.IPS        = self.IN/self.SEC
         self.MPH        = self.MILE/self.HOUR
 
