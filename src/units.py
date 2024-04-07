@@ -148,11 +148,11 @@ class units():
         # mass
         self.SLINCH     = self.SLUG*12
         self.LBM        = self.LBF/self.G0
-        self.OZ         = self.LBM/16
-
+        self.OZM        = self.LBM/16
         self.GM         = self.KG*1.0E-03
                        
         # force - ref Newton
+        self.OZF        = self.LBF/16
         self.TON        = self.LBF*2000
         self.KN         = self.N*1000
 
@@ -166,8 +166,6 @@ class units():
 
         # speed ref m/sec
         self.FPS        = self.FT/self.SEC
-        self.FPM        = self.FT/self.MIN
-        self.IPS        = self.IN/self.SEC
         self.MPH        = self.MILE/self.HOUR
 
         self.KPH        = self.KM/self.HOUR
