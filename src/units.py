@@ -162,7 +162,7 @@ class units():
         self.MSI        = self.PSI*1.0E6
 
         self.PA         = self.N/self.M**2
-        self.BAR        = self.PA
+        self.BAR        = self.PA*1.0E5
 
         # speed ref m/sec
         self.FPS        = self.FT/self.SEC
@@ -181,3 +181,14 @@ class units():
         self.L          = self.M3*1.0E-03
         self.ML         = self.M3*1.0E-06
         self.CC         = self.M3*1.0E-06
+        
+        # energy
+        self.J          = self.KG*self.M**2/self.SEC**2
+        self.BTU        = self.J*1.055056E03
+        self.CAL        = self.J*4.1868
+        
+        # power
+        self.W          = self.KG*self.M**2/self.SEC**2
+        self.HP         = self.FT*self.LBF/self.SEC*550
+        
+        
